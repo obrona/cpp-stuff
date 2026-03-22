@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 template<typename T, typename R, typename Transform, typename Combine>
 struct SegTree {
     Transform transform;
@@ -50,3 +53,22 @@ struct SegTree {
         }
     }
 };
+
+void test()  {
+    struct Identity {
+        int operator()(int x) { return x; }
+    };
+
+    struct Sum {
+        int operator()(int x, int y) { return x + y; }
+    };
+
+    vector<int> arr = {3,1,2,5,4,1,2};
+    SegTree<int, int, Identity, Sum> st(arr);
+    assert(st.query(0, 2) == 6);
+    assert(st.query(3, 6) == 12);
+}
+
+int main() {
+    test();
+}
